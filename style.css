@@ -1,0 +1,168 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;   
+  padding: 1rem;
+}
+
+.menu_btn {
+  position: relative;
+  z-index: 200;                
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.menu_btn span {
+  display: block;              
+  width: 24px;
+  height: 3px;
+  background: #222;
+  border-radius: 3px;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+/* ubah jadi X saat menu terbuka */
+.menu_btn.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.menu_btn.open span:nth-child(2) {
+  opacity: 0;
+}
+.menu_btn.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  height: 100dvh;              
+  width: 75%;
+  max-width: 300px;            
+  padding: 5rem 1.5rem 1.5rem; 
+  background: #fff;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+
+  /* tertutup: geser ke kanan sampai keluar layar */
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform 0.35s ease, visibility 0.35s;
+}
+
+.navbar.open {
+  transform: translateX(0);    
+  visibility: visible;
+}
+
+.navbar_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav_link {
+  display: block;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+
+.nav_link.active {
+  color: #2373F4;
+}
+
+
+.overlay {
+  position: fixed;
+  inset: 0;                   
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 90;                
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s;
+}
+
+.overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 768px) {
+  .header {
+    justify-content: flex-start;
+  }
+
+  .menu_btn,
+  .overlay {
+    display: none;
+  }
+
+  .navbar {
+    position: static;
+    height: auto;
+    width: auto;
+    max-width: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    z-index: auto;
+    transform: none;
+    visibility: visible;
+    transition: none;
+  }
+
+  .navbar_list {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav_link {
+    padding: 0 0 4px;
+    border-bottom: 0;
+  }
+
+  .nav_link.active {
+    color: black;
+    border-bottom: 4px solid #7c5cf0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    padding: 1.5rem 3rem;
+  }
+
+  .navbar_list {
+    gap: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
